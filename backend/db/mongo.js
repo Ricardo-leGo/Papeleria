@@ -21,8 +21,8 @@ export const getConnection = async () => {
         
     );
 
-console.log();
-    console.log(`<====================== ${  conn } ======================>`);
+console.log(conn);
+    console.log(`<====================== ${  await conn } ======================>`);
   }
 
   return  conn ;

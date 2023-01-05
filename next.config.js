@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
 
-module.exports = nextConfig
+const nextConfig = {
+  distDir:"build",
+  reactStrictMode: true,
+
+  publicRuntimeConfig: {
+    CYPHERKEY:process.env.CYPHERKEY,
+  }
+
+}
+ 
+module.exports =  nextConfig;

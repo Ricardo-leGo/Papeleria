@@ -26,28 +26,18 @@ const apolloServer = new ApolloServer({
 
       return { dbConn, req }
   },
-  plugins: [
-    ApolloServerPluginLandingPageGraphQLPlayground(),
-  ],
+
+  plugins: [ ApolloServerPluginLandingPageGraphQLPlayground() ]
+
 });
+
 const startServer = apolloServer.start();
 
-export default async function handler(
-  req, 
-  res
-  ){
+export default async function handler( req, res){
 
   await startServer;
-  await apolloServer.createHandler({
-  path: "/api/graphql",
+  await apolloServer.createHandler({path: "/api/graphql"})( req, res );
 
-  })(
-    req, 
-    res
-    );
-}
-export const config = {
-  api: {
-    bodyParser: false,
-  },
 };
+
+export const config = { api: { bodyParser: true }};
