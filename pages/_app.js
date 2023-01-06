@@ -2,7 +2,7 @@ import LayoutProvider from '../frontend/context/LayoutContext';
 import Layer from '../frontend/Layout/Layout';
 import AuthProvider from '../frontend/context/LoginContext';
 import '../styles/globals.css';
-import { ChakraProvider, layout } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function App({ Component, pageProps }) {
   

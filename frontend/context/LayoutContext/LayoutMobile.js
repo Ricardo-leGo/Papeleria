@@ -45,7 +45,6 @@ const MobileLayout=  extendTheme({
             body:{
                 with:'100vw',
                 height:'100vh',
-                backgroundColor:'red',
                 display:'flex',
                 justifyContent:'center',
                 alignItems:'center'

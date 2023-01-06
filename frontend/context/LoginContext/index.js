@@ -1,10 +1,29 @@
-import React, {createContext}  from 'react'
+import React, {createContext, useState}  from 'react'
 import store from './store';
+import { SignUpFormData, SignInFormData, LabelsErrorInputs } from '../../utils/Constants';
+import { ValidationSystem } from '../../utils/ValidationSystem';
 
 export const LoginContext =  createContext(store);
-
-
 const AuthProvider =  ({children}) => {
+
+
+    const [IsSignup, setIsSignup] = useState(false);
+    const [Values, setValues] = useState( {} );
+
+    const setIsSignupFunc = booleano => {
+        return setIsSignup(booleano)
+    }
+
+
+    const setValuesFunc = ({name, value}) => {
+        setValues({
+            ...Values,
+            [name]: value
+          });
+    }
+
+    const resetValuesFunc = () => setValues({});
+    
 
     const sayhello= (name=" fulanito ") =>{
         console.log(  `hola ${name}` ) ;
@@ -34,6 +53,16 @@ const AuthProvider =  ({children}) => {
         SendValues,
         SetSession,
         Goto,
+        ValidationSystem,
+        setIsSignupFunc,
+        setValuesFunc,
+        resetValuesFunc,
+
+        SignUpFormData, 
+        SignInFormData, 
+        //Booleans
+        IsSignup
+
     }
 
 
