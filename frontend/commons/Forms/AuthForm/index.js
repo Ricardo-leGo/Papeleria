@@ -22,36 +22,37 @@ const AuthForm = ({
 
 }) => {
 
-  function validateName(value) {
-    let error
+  const validateName = (value) => {
+    let error 
+
+    console.log( value, "=>", "===" );
+    
     if (!value) {
       error = 'Name is required'
     } else if (value.toLowerCase() !== 'naruto') {
       error = "Jeez! You're not a fan 😱"
     }
     
+    if(!error)SendValues(value);
+    
     return error
   }
 
-  const [Values, setValues] = useState( {} );
 
-const HandleChanges = ({name,value}) => {
 
-  setValues({
-    ...Values,
-    [name]: value
-  });
-}
 
   return (
     <Formik
     initialValues={{ name: '' }}
     onSubmit={(values, actions) => {
+        
+        console.log(values, actions, "values", "actions");
 
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2))
         actions.setSubmitting(false)
       }, 1000)
+
     }}
 
     validationSchema={ validate }
@@ -60,12 +61,21 @@ const HandleChanges = ({name,value}) => {
       <Form>
     {
       forms && 
-      forms.map( ({NameInput, InputPlaceholder, TypeInput}, i ) => (
+      forms
+      .map( ({NameInput, InputPlaceholder, TypeInput}, i ) => (
         <Field  key={ `${NameInput}-${i}` }  name={NameInput} validate={validateName}>
           {({ field, form }) => (
             <FormControl isInvalid={form.errors.name && form.touched.name}>
               <FormLabel>{InputPlaceholder}</FormLabel>
-              <Input {...field} placeholder={InputPlaceholder} type={TypeInput}  onChange={({target})=>HandleChanges(target)}/>
+              <Input 
+
+                  {...field} 
+                  placeholder={InputPlaceholder} 
+                  type={TypeInput}
+                  onChange={({target})=>SetValues(target)}
+
+                  />
+
               <FormErrorMessage>{form.errors.name}</FormErrorMessage>
             </FormControl>
           )}

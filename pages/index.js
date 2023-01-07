@@ -7,6 +7,7 @@ import { LoginContext } from '../frontend/context/LoginContext'
 
 import TabComponent from '../frontend/commons/Tabs'
 import AuthForm from '../frontend/commons/Forms/AuthForm'
+import { Center } from '@chakra-ui/react'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,6 +20,7 @@ const  Home = (props) =>  {
     ValidationSystem , 
     IsSignup,
     SignUpFormData, 
+    SendValues,
     setIsSignupFunc,
     setValuesFunc,
     resetValuesFunc
@@ -28,21 +30,24 @@ const  Home = (props) =>  {
 
   return (
     <>
+
+    <Center>
     <TabComponent 
     ArrComponents={
       [
-        <AuthForm
+            <AuthForm
         IsSignIn={!IsSignup}
         IsSignup={IsSignup}
-        SendValues={(...args) => args}
+        SendValues={(values) => SendValues(values)}
         SetValues={(values)=> {setValuesFunc(values)}}
         forms={ SignUpFormData.filter(el => el.form.includes("in")) }
         validate={ValidationSystem(  IsSignup ) }
-        />,
+        />
+      ,
         <AuthForm
         IsSignIn={!IsSignup}
         IsSignup={IsSignup}
-        SendValues={(...args) => args}
+        SendValues={values => SendValues(values)}
         SetValues={(values)=> {setValuesFunc(values)}}
         forms={ SignUpFormData }
         validate={ValidationSystem(  !IsSignup ) }
@@ -58,6 +63,8 @@ const  Home = (props) =>  {
     IsSignup={IsSignup}
     reset={resetValuesFunc}
     />
+    </Center>
+ 
     </>
   )
 

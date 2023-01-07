@@ -6,7 +6,6 @@ import { ValidationSystem } from '../../utils/ValidationSystem';
 export const LoginContext =  createContext(store);
 const AuthProvider =  ({children}) => {
 
-
     const [IsSignup, setIsSignup] = useState(false);
     const [Values, setValues] = useState( {} );
 
@@ -15,7 +14,7 @@ const AuthProvider =  ({children}) => {
     }
 
 
-    const setValuesFunc = ({name, value}) => {
+    const setValuesFunc = ({name, value}) => {        
         setValues({
             ...Values,
             [name]: value
@@ -34,10 +33,10 @@ const AuthProvider =  ({children}) => {
 
     }
 
-    const SendValues = () => {
+    const SendValues = (...args) => {
 
+            console.log( args , "==========SendValues===========");
     }
-
     const SetSession = () => {
 
     }
@@ -45,7 +44,7 @@ const AuthProvider =  ({children}) => {
     const Goto = () => {
 
     }
-
+51
 
     const state =  {
         sayhello,
@@ -57,9 +56,7 @@ const AuthProvider =  ({children}) => {
         setIsSignupFunc,
         setValuesFunc,
         resetValuesFunc,
-
-        SignUpFormData, 
-        SignInFormData, 
+        SignUpFormData,
         //Booleans
         IsSignup
 
