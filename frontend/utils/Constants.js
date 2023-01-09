@@ -1,6 +1,6 @@
 export const SignUpFormData = [
-  {NameInput:"Email",          InputPlaceholder:"Email"              ,form:["up"]        , TypeInput:"email" },
-  {NameInput:"Usuario",        InputPlaceholder:"Usuario"            ,form:["up", "in"]  , TypeInput: "text"},
+  {NameInput:"Email",          InputPlaceholder:"Email"              ,form:["up"]        , TypeInput:"email"    },
+  {NameInput:"Usuario",        InputPlaceholder:"Usuario"            ,form:["up", "in"]  , TypeInput: "text"    },
   {NameInput:"Password",       InputPlaceholder:"Password"           ,form:["up", "in"]  , TypeInput:"password" },
   {NameInput:"Confirmpassword",InputPlaceholder:"Confirm password"   ,form:["up"]        , TypeInput: "password"},
 ];

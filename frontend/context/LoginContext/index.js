@@ -34,9 +34,7 @@ const AuthProvider =  ({children}) => {
     return 
     }
 
-    const SetValues = ({name,value}) => {
-
-    }
+  
 
     const SendValues = (...args) => {
 
@@ -49,15 +47,35 @@ const AuthProvider =  ({children}) => {
     const Goto = () => {
 
     }
+
+
+    const validateName = (value) => {
+            let error 
+        
+            
+            if (!value) {
+              error = 'Name is required'
+            } else if (value.toLowerCase() !== 'naruto') {
+              error = "Jeez! You're not a fan 😱"
+            }
+            
+            if(!error){
+                SendValues(value);
+            return
+            }
+            console.log( value, "=>", "===" , error);
+
+            return error
+    }
 51
 
     const state =  {
         sayhello,
-        SetValues,
         SendValues,
         SetSession,
         Goto,
         ValidationSystem,
+        validateName,
         setIsSignupFunc,
         setValuesFunc,
         resetValuesFunc,

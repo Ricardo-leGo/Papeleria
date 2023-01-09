@@ -1,4 +1,4 @@
-import React , {useState}from 'react'
+import React , {useState, useEffect}from 'react'
 import { Field, Form, Formik } from 'formik';
 
 
@@ -18,33 +18,38 @@ const AuthForm = ({
   SendValues,
   SetValues,
   validate,
-  forms
+  forms,
+  validateName,
 
 }) => {
 
-  const validateName = (value) => {
-    let error 
-
-    console.log( value, "=>", "===" );
-    
-    if (!value) {
-      error = 'Name is required'
-    } else if (value.toLowerCase() !== 'naruto') {
-      error = "Jeez! You're not a fan 😱"
-    }
-    
-    if(!error)SendValues(value);
-    
-    return error
-  }
+    const [TypeObject, setTypeObject] = useState({});
 
 
+ 
+    useEffect(() => {
+    forms.forEach((element,i) => {
+      setTypeObject({
+        ...TypeObject,
+        [element.NameInput]:""
+      });
+
+      console.log({
+        ...TypeObject,
+        [element.NameInput]:""
+      });
+
+
+    });
+
+    console.log( TypeObject );
+    }, [])
 
 
   return (
     <Formik
-    initialValues={{ name: '' }}
-    onSubmit={(values, actions) => {
+    initialValues={ TypeObject }
+    onSubmit={ async (values, actions) => {
         
         console.log(values, actions, "values", "actions");
 
@@ -54,36 +59,34 @@ const AuthForm = ({
       // }, 1000)
 
     }}
-
-    validationSchema={ validate }
+    validationSchema={validate}
   >
-    {(props) => (
+    {(props) => {
+
+      {/* console.log(props, "asdasdasd"); */}
+      return (
       <Form>
     {
       forms && 
       forms
       .map( ({NameInput, InputPlaceholder, TypeInput}, i ) => (
-
+        
         <Field  key={ `${NameInput}-${i}` }  name={NameInput} validate={validateName}>
-          {
-            ({ field, form }) => (
-              <FormControl isInvalid={form.errors.name && form.touched.name}>
-
-                <FormLabel>{InputPlaceholder}</FormLabel>
-                <Input 
-
-                    {...field} 
-                    placeholder={InputPlaceholder} 
-                    type={TypeInput}
-                    onChange={({target})=>SetValues(target)}
-
-                    />
-
-                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-              </FormControl>
-            )
-          }
-
+          {({ field, form }) =>{
+              console.log(form, "=================");
+            return  (
+            <FormControl isInvalid={form.errors.name && form.touched.name}>
+              <FormLabel>{InputPlaceholder}</FormLabel>
+              <Input
+                  {...field} 
+                  placeholder={InputPlaceholder} 
+                  type={TypeInput}
+                  onChange={({target})=>SetValues(target)}
+                  />
+              <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+            </FormControl>
+          )
+          }}
         </Field>
 
       ))
@@ -97,7 +100,8 @@ const AuthForm = ({
           {IsSignup ? "Alta":"Ingresar"}
         </Button>
       </Form>
-    )}
+    )
+    }}
 
   </Formik>
   )
