@@ -10,14 +10,6 @@ import {
 } from './../../../../utils/Constants';
 
 
-const {
-
-  TooShort,
-  TooLong,
-  InvalidEmail,
-  Required
-
-} = LabelsErrorInputs;
 
 import {
   FormControl,
@@ -27,61 +19,81 @@ import {
   Input,
 } from '@chakra-ui/react'
 
-const SignInSchema = yup.object().shape({
 
-  Login_email: yup
-  .string()
-  .min(2, TooShort)
-  .max(50, TooShort)
-  .email(InvalidEmail)
-  .required(Required),
-  
-  Login_password: yup
-  .string()
-  .email(InvalidEmail)
-  .required(Required)
-  
-});
-const LoginFormComponent = () => {
+const LoginFormComponent = ({
+  ValidationSchema,
+  SendValues,
+
+}) => {
 
 
   return (
     <Formik
-      initialValues={{ Usuario: 'Email', Password :"" }}
+      initialValues={{ email: '', Password :"" }}
       onSubmit={(values, actions) => {
+        SendValues(values);
+
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 1000)
+        actions.setSubmitting(false);
+        }, 1000);
+
+
+
+
       }}
 
-      validationSchema={SignInSchema}
+      validationSchema={ValidationSchema}
     >
-      {(props) => (
-        <Form>
-          <Field name='Login_email' >
+      {({
+        values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          touched
+      }) => (
+        <Form onSubmit={handleSubmit}>
+          <Field name='email'  >
 
-            {({ field, form }) => (
+            {
+              ({ field }) => {
+                return (
               <FormControl 
-              isInvalid={form.errors.Email && form.touched.Email} >
+              isInvalid={errors.email && touched.email} >
 
                 <FormLabel>Email</FormLabel>
-                <Input {...field} placeholder='Email' type='email' />
-                <FormErrorMessage>{form.errors.Email}</FormErrorMessage>
+                <Input 
+                {...field} 
+                placeholder='Email' 
+                type='email' 
+                onChange={handleChange}
+                onBlur={handleBlur}
+                  value={values.email}
+                />
+                <FormErrorMessage>{errors.email && touched.email && errors.email}</FormErrorMessage>
               </FormControl>
             )}
+            }
           </Field>
 
-          <Field name='Login_password' >
+          <Field name='Password' >
 
-            {({ field, form }) => (
+            {({ field }) => (
               <FormControl 
 
-              isInvalid={form.errors.Password && form.touched.Password} >
+              isInvalid={errors.Password && touched.Password} >
 
                 <FormLabel>Password</FormLabel>
-                <Input {...field} placeholder='**********' type='password' />
-                <FormErrorMessage>{form.errors.Password}</FormErrorMessage>
+                <Input 
+                {...field} 
+                placeholder='**********' 
+                type='password' 
+                onChange={handleChange}
+                onBlur={handleBlur}
+                  value={values.Password}
+                />
+                <FormErrorMessage>{errors.Password && touched.Password && errors.Password}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -91,7 +103,7 @@ const LoginFormComponent = () => {
           <Button
             mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
+            isLoading={isSubmitting}
             type='submit'
           >
             Submit

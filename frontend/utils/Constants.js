@@ -15,7 +15,7 @@ export const LabelsErrorInputs = {
   TooShort:"Muy corto",
   TooLong:"Muy grande",
   Required:"Requerido",
-  InvalidEmail:"Email Invàlido",
+  InvalidEmail:"Email Invàlido ",
 
 };
 

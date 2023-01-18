@@ -22,7 +22,7 @@ const  Home = (props) =>  {
     resetValuesFunc,
     SignInSchema,
     SignupSchema,
-
+    SendValues,
   } =  ctx;
 
 
@@ -38,6 +38,8 @@ const  Home = (props) =>  {
           <LoginFormComponent 
           ValidationSchema={SignInSchema}
           key={"loginform"}
+          SendValues={(values) => SendValues(values)}
+
           />,
           <SignupComponent
           key='Signupform'

@@ -24,8 +24,16 @@ const SignupComponent = ({
 
       validationSchema={ValidationSchema}
     >
-      {(props) => (
-        <Form>
+      {({
+        values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          touched
+      }) => (
+        <Form onSubmit={handleSubmit}>
 
 
           <Field name='Usuario' >
@@ -33,12 +41,19 @@ const SignupComponent = ({
           {({ field, form }) => (
             <FormControl 
 
-            isInvalid={form.errors.Usuario && form.touched.Usuario} 
+            isInvalid={errors.Usuario && touched.Usuario} 
             >
 
               <FormLabel>Usuario</FormLabel>
-              <Input {...field} placeholder='Usuario' type='text' />
-              <FormErrorMessage>{form.errors.Usuario}</FormErrorMessage>
+              <Input 
+              {...field} 
+              placeholder='Usuario' 
+              type='text' 
+              onChange={handleChange}
+                onBlur={handleBlur}
+                  value={values.Usuario}
+              />
+              <FormErrorMessage>{errors.Usuario && touched.Usuario && errors.Usuario}</FormErrorMessage>
             </FormControl>
           )}
           </Field>
@@ -54,8 +69,15 @@ const SignupComponent = ({
               variant='email'>
 
                 <FormLabel>Email</FormLabel>
-                <Input {...field} placeholder='Email' type='email' />
-                <FormErrorMessage>{form.errors.Email}</FormErrorMessage>
+                <Input 
+                {...field} 
+                placeholder='Email' 
+                type='email' 
+                onChange={handleChange}
+                onBlur={handleBlur}
+                  value={values.Email}
+                />
+                <FormErrorMessage>{errors.Email && touched.Email && errors.Email}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -65,11 +87,19 @@ const SignupComponent = ({
             {({ field, form }) => (
               <FormControl 
 
-              isInvalid={form.errors.Password && form.touched.Password} >
+              isInvalid={errors.Password && touched.Password} >
 
                 <FormLabel>Password</FormLabel>
-                <Input {...field} placeholder='**********' type='password' />
-                <FormErrorMessage>{form.errors.Password}</FormErrorMessage>
+                <Input 
+                {...field} 
+                placeholder='**********' 
+                type='password' 
+                onChange={handleChange}
+                onBlur={handleBlur}
+                  value={values.Password}
+
+                />
+                <FormErrorMessage>{errors.Password && touched.Password && errors.Password}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -80,11 +110,18 @@ const SignupComponent = ({
             {({ field, form }) => (
               <FormControl 
 
-              isInvalid={form.errors.ConfirmPassword && form.touched.ConfirmPassword} >
+              isInvalid={errors.ConfirmPassword && touched.ConfirmPassword} >
 
                 <FormLabel>Confirma Password</FormLabel>
-                <Input {...field} placeholder='**********' type='password' />
-                <FormErrorMessage>{form.errors.ConfirmPassword}</FormErrorMessage>
+                <Input 
+                {...field} 
+                placeholder='**********'
+                 type='password'
+                 onChange={handleChange}
+                onBlur={handleBlur}
+                  value={values.ConfirmPassword}
+                 />
+                <FormErrorMessage>{errors.ConfirmPassword && touched.ConfirmPassword && errors.ConfirmPassword}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -92,7 +129,7 @@ const SignupComponent = ({
           <Button
             mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
+            isLoading={isSubmitting}
             type='submit'
           >
             Submit

@@ -33,7 +33,7 @@ export const SignupSchema = yup
   Email: yup.string()
   .min(2, TooShort)
   .max(50, TooShort)
-  .email(InvalidPass)
+  .matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, "No es un email válido")
   .required(Required),
 
   Password: yup.string()
@@ -45,8 +45,7 @@ export const SignupSchema = yup
   .matches(/[^\w]/, 'Password requiere al menos un símbolo')
   ,
 
-  Confirmpassword:yup
-  .string()
+  ConfirmPassword:yup.string()
   .oneOf(
     [
       yup.ref('Password'), null
@@ -56,24 +55,27 @@ export const SignupSchema = yup
 });
 
 
-export const SignInSchema = yup.object().shape({
 
-  Login_email: yup
+
+const SignInSchema = yup.object().shape({
+
+  email: yup
   .string()
   .min(2, TooShort)
   .max(50, TooShort)
-  .email(InvalidEmail)
-  .required(Required),
-  
-  Login_password: yup
-  .string()
-  .email(InvalidEmail)
+  //.email(InvalidEmail)
   .required(Required)
+  .matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, "No es un email válido"),
+  Password: yup
+  .string()
+  .required('Requerido') 
+  .min(8, TooShort)
+  .matches(/[0-9]/, 'Password requiere un Número')
+  .matches(/[a-z]/, 'Password requiere al menos una minúscula')
+  .matches(/[A-Z]/, 'Password requiere al menos una mayúscula')
+  .matches(/[^\w]/, 'Password requiere al menos un símbolo')
   
 });
-
-
-
 export const ValidationSystem = 
 boleano => boleano ? SignupSchema : SignInSchema
 
