@@ -1,13 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
+
 import {bool} from 'prop-types'
 import { Inter } from '@next/font/google'
 import { useContext } from 'react'
 import { LoginContext } from '../frontend/context/LoginContext'
 
 import TabComponent from '../frontend/commons/Tabs'
-import AuthForm from '../frontend/commons/Forms/AuthForm'
 import { Center } from '@chakra-ui/react'
+import LoginFormComponent from '../frontend/commons/Forms/AuthForm/LoginForm'
+import SignupComponent from '../frontend/commons/Forms/AuthForm/SignupForm'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,13 +17,12 @@ const  Home = (props) =>  {
   const ctx = useContext( LoginContext );
 
   const { 
-    ValidationSystem , 
     IsSignup,
-    SignUpFormData, 
-    SendValues,
     setIsSignupFunc,
-    setValuesFunc,
-    resetValuesFunc
+    resetValuesFunc,
+    SignInSchema,
+    SignupSchema,
+
   } =  ctx;
 
 
@@ -32,37 +31,32 @@ const  Home = (props) =>  {
     <>
 
     <Center>
-    <TabComponent 
-    ArrComponents={
-      [
-            <AuthForm
-        IsSignIn={!IsSignup}
-        IsSignup={IsSignup}
-        SendValues={(values) => SendValues(values)}
-        SetValues={(values)=> {setValuesFunc(values)}}
-        forms={ SignUpFormData.filter(el => el.form.includes("in")) }
-        validate={ValidationSystem(  IsSignup ) }
-        />
-      ,
-        <AuthForm
-        IsSignIn={!IsSignup}
-        IsSignup={IsSignup}
-        SendValues={values => SendValues(values)}
-        SetValues={(values)=> {setValuesFunc(values)}}
-        forms={ SignUpFormData }
-        validate={ValidationSystem(  !IsSignup ) }
-        />
+      <TabComponent 
+      key={"Tabs_"}
+      ArrComponents={
+        [
+          <LoginFormComponent 
+          ValidationSchema={SignInSchema}
+          key={"loginform"}
+          />,
+          <SignupComponent
+          key='Signupform'
+          ValidationSchema={SignupSchema}
+          />
+
+        ]
+      }
+      Nombres={
+        [
+        "Ingreso",
+        "Registro"
       ]
     }
-    Nombres={[
-      "Ingreso",
-      "Alta de usuario"
-    ]}
 
-    setIsSignupFunc={(value) => setIsSignupFunc(value)}
-    IsSignup={IsSignup}
-    reset={resetValuesFunc}
-    />
+      setIsSignupFunc={(value) => setIsSignupFunc(value)}
+      IsSignup={IsSignup}
+      reset={resetValuesFunc}
+      />
     </Center>
  
     </>

@@ -1,6 +1,6 @@
 import React, {createContext, useState}  from 'react'
 import store from './store';
-import { SignUpFormData, SignInFormData, LabelsErrorInputs } from '../../utils/Constants';
+import { SignUpFormData, LabelErrorPassword } from '../../utils/Constants';
 import { ValidationSystem } from '../../utils/ValidationSystem';
 
 export const LoginContext =  createContext(store);
@@ -8,6 +8,11 @@ const AuthProvider =  ({children}) => {
 
     const [IsSignup, setIsSignup] = useState(false);
     const [Values, setValues] = useState( {} );
+
+
+    const [ SignInSchema ] = useState(ValidationSystem(false));
+    const [ SignupSchema ] = useState(ValidationSystem(true));
+
 
     const setIsSignupFunc = booleano => {
         return setIsSignup(booleano)
@@ -56,9 +61,15 @@ const AuthProvider =  ({children}) => {
         setIsSignupFunc,
         setValuesFunc,
         resetValuesFunc,
+        
         SignUpFormData,
+        LabelErrorPassword,
         //Booleans
-        IsSignup
+
+        IsSignup,
+
+        SignInSchema,
+        SignupSchema,
 
     }
 

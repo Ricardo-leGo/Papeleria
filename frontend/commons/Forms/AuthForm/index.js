@@ -48,10 +48,10 @@ const AuthForm = ({
         
         console.log(values, actions, "values", "actions");
 
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
-        actions.setSubmitting(false)
-      }, 1000)
+      // setTimeout(() => {
+      //   alert(JSON.stringify(values, null, 2))
+      //   actions.setSubmitting(false)
+      // }, 1000)
 
     }}
 
@@ -63,27 +63,31 @@ const AuthForm = ({
       forms && 
       forms
       .map( ({NameInput, InputPlaceholder, TypeInput}, i ) => (
+
         <Field  key={ `${NameInput}-${i}` }  name={NameInput} validate={validateName}>
-          {({ field, form }) => (
-            <FormControl isInvalid={form.errors.name && form.touched.name}>
-              <FormLabel>{InputPlaceholder}</FormLabel>
-              <Input 
+          {
+            ({ field, form }) => (
+              <FormControl isInvalid={form.errors.name && form.touched.name}>
 
-                  {...field} 
-                  placeholder={InputPlaceholder} 
-                  type={TypeInput}
-                  onChange={({target})=>SetValues(target)}
+                <FormLabel>{InputPlaceholder}</FormLabel>
+                <Input 
 
-                  />
+                    {...field} 
+                    placeholder={InputPlaceholder} 
+                    type={TypeInput}
+                    onChange={({target})=>SetValues(target)}
 
-              <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-            </FormControl>
-          )}
+                    />
+
+                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+              </FormControl>
+            )
+          }
+
         </Field>
+
       ))
     }
-
-
         <Button
           mt={4}
           colorScheme='teal'

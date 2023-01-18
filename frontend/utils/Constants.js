@@ -18,3 +18,9 @@ export const LabelsErrorInputs = {
   InvalidEmail:"Email Invàlido",
 
 };
+
+export const LabelErrorPassword = {
+  InvalidPass:"Password invalido",
+  NonEqualPass:"Las contraseñas no son iguales"
+
+}
