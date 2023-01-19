@@ -14,7 +14,7 @@ function TabComponent({
 
 const SearchInputs = () => {
 
-  document.querySelectorAll("input").forEach( ( el ) => el.value="" )
+  document.querySelectorAll("input").forEach( ( el ) => el.value="")
   setIsSignupFunc( !IsSignup)
   reset();
 }

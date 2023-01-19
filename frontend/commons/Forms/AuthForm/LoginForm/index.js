@@ -1,15 +1,6 @@
 import React from 'react'
-import * as yup from 'yup'
 
 import { Formik , Field, Form} from 'formik'
-import {
-
-  LabelErrorPassword,
-  LabelsErrorInputs
-
-} from './../../../../utils/Constants';
-
-
 
 import {
   FormControl,
@@ -32,14 +23,9 @@ const LoginFormComponent = ({
       initialValues={{ email: '', Password :"" }}
       onSubmit={(values, actions) => {
         SendValues(values);
-
         setTimeout(() => {
         actions.setSubmitting(false);
         }, 1000);
-
-
-
-
       }}
 
       validationSchema={ValidationSchema}
@@ -54,8 +40,7 @@ const LoginFormComponent = ({
           touched
       }) => (
         <Form onSubmit={handleSubmit}>
-          <Field name='email'  >
-
+          <Field name='email'>
             {
               ({ field }) => {
                 return (
@@ -67,8 +52,8 @@ const LoginFormComponent = ({
                 {...field} 
                 placeholder='Email' 
                 type='email' 
-                onChange={handleChange}
-                onBlur={handleBlur}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   value={values.email}
                 />
                 <FormErrorMessage>{errors.email && touched.email && errors.email}</FormErrorMessage>
@@ -89,8 +74,8 @@ const LoginFormComponent = ({
                 {...field} 
                 placeholder='**********' 
                 type='password' 
-                onChange={handleChange}
-                onBlur={handleBlur}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   value={values.Password}
                 />
                 <FormErrorMessage>{errors.Password && touched.Password && errors.Password}</FormErrorMessage>
@@ -106,7 +91,7 @@ const LoginFormComponent = ({
             isLoading={isSubmitting}
             type='submit'
           >
-            Submit
+            Ingresar
           </Button>
         </Form>
       )}

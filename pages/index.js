@@ -1,4 +1,3 @@
-
 import {bool} from 'prop-types'
 import { Inter } from '@next/font/google'
 import { useContext } from 'react'
@@ -37,13 +36,13 @@ const  Home = (props) =>  {
         [
           <LoginFormComponent 
           ValidationSchema={SignInSchema}
-          key={"loginform"}
+          key="loginform"
           SendValues={(values) => SendValues(values)}
-
           />,
           <SignupComponent
           key='Signupform'
           ValidationSchema={SignupSchema}
+          SendValues={(values) => SendValues(values)}
           />
 
         ]

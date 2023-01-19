@@ -33,7 +33,7 @@ export const SignupSchema = yup
   Email: yup.string()
   .min(2, TooShort)
   .max(50, TooShort)
-  .matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, "No es un email válido")
+  .matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, InvalidPass)
   .required(Required),
 
   Password: yup.string()
@@ -50,7 +50,7 @@ export const SignupSchema = yup
     [
       yup.ref('Password'), null
     ], 
-    'Las contraseñas no coinciden'
+    NonEqualPass
     )
 });
 
@@ -65,15 +65,12 @@ const SignInSchema = yup.object().shape({
   .max(50, TooShort)
   //.email(InvalidEmail)
   .required(Required)
-  .matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, "No es un email válido"),
+  .matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, InvalidPass),
   Password: yup
   .string()
   .required('Requerido') 
   .min(8, TooShort)
-  .matches(/[0-9]/, 'Password requiere un Número')
-  .matches(/[a-z]/, 'Password requiere al menos una minúscula')
-  .matches(/[A-Z]/, 'Password requiere al menos una mayúscula')
-  .matches(/[^\w]/, 'Password requiere al menos un símbolo')
+
   
 });
 export const ValidationSystem = 

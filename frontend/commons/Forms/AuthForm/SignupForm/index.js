@@ -94,8 +94,8 @@ const SignupComponent = ({
                 {...field} 
                 placeholder='**********' 
                 type='password' 
-                onChange={handleChange}
-                onBlur={handleBlur}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   value={values.Password}
 
                 />
@@ -117,8 +117,8 @@ const SignupComponent = ({
                 {...field} 
                 placeholder='**********'
                  type='password'
-                 onChange={handleChange}
-                onBlur={handleBlur}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   value={values.ConfirmPassword}
                  />
                 <FormErrorMessage>{errors.ConfirmPassword && touched.ConfirmPassword && errors.ConfirmPassword}</FormErrorMessage>
@@ -132,7 +132,7 @@ const SignupComponent = ({
             isLoading={isSubmitting}
             type='submit'
           >
-            Submit
+            Registro
           </Button>
         </Form>
       )}

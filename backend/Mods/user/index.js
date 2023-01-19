@@ -4,15 +4,15 @@ export default {
         const res  = await dbConn.collection("dummy").insertOne({
             name:"Name",
             status:true
-        })
-
-        console.log( dbConn );
+        });
 
 
         return {
-            msg: "hola",
-            status:true, 
-            Result:["hola"]
-        }
+
+        msg: "hola",
+        status:true, 
+        Result:["hola"]
+
+        };
     }
 }
