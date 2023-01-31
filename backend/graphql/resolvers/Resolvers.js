@@ -1,13 +1,28 @@
 import user from "../../Mods/user";
 
-const resolvers = {
+export default  {
 
     Query:{
-        ...user
-    }
+        insertIntoDatabase: async (_, data, {dbConn}) => {
+
+            const res  = await dbConn.collection("dummy").insertOne({
+                name:"Name",
+                status:true
+            });
+    
+    
+            return {
+    
+            msg: "hola",
+            status:true, 
+            Result:["hola"]
+    
+            };
+        }
+    },
+
 }
 
 
 
 
-export default () => resolvers;

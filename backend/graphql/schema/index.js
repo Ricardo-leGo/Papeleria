@@ -1,6 +1,7 @@
 import { gql } from "apollo-server-micro";
 
-const Types = gql`
+
+const Types = `
 type User {
   id: ID
 }
@@ -15,15 +16,21 @@ type GenericResult{
 }
 
 type Query {
-  sayhello: String
   insertIntoDatabase:GenericResult
-}
+} 
+
+
 `;
 
 
+
+
 export default [
-    Types
-]
+  Types
+].join(" ")
 
 
-
+// export default makeExecutableSchema({
+//   typeDefs,
+//   resolvers
+// }
