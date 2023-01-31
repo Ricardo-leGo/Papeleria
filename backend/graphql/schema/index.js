@@ -1,5 +1,3 @@
-import { gql } from "apollo-server-micro";
-
 
 const Types = `
 type User {
@@ -18,19 +16,15 @@ type GenericResult{
 type Query {
   insertIntoDatabase:GenericResult
 } 
-
-
 `;
 
 
 
 
 export default [
+  
   Types
+
 ].join(" ")
 
 
-// export default makeExecutableSchema({
-//   typeDefs,
-//   resolvers
-// }

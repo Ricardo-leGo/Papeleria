@@ -5,6 +5,21 @@ import backendSchema                    from '../backend/graphql/schema'
 import { HttpLink }                     from '@apollo/client/link/http'
 let apolloClient = null;
 
+ç
+const auth = setContext((operation, context) => {
+  const token = localStorage.getItem('TokenUser');
+
+  if (token === null) {
+    return {};
+  } else {
+    return {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    };
+  }
+});
+
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
     const { schema } = backendSchema
