@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({path:'.env'});
 
+
 import { createGraphQLHandler } from "next-graphql-server";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import typeDefs from './../../backend/graphql/schema';
